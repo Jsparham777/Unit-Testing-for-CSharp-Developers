@@ -29,5 +29,23 @@ namespace TestNinja.UnitTests
 
             //Assert.That(() => logger.Log(error), Throws.Exception.TypeOf<DivideByZeroException>)
         }
+
+        [Test]
+        public void Log_ValidError_RaiseErrorLoggedEvent()
+        {
+            //Arrange
+            var logger = new ErrorLogger();
+
+            var id = Guid.Empty;
+            //Subscribe to the event handler (sender = source of the event, args = event arguments)
+            //The lambda expression represents the event handler. When the event is raised the id will be assigned.
+            logger.ErrorLogged += (sender, args) => { id = args; };
+
+            //Act
+            logger.Log("a");
+
+            //Assert
+            Assert.That(id, Is.Not.EqualTo(Guid.Empty));
+        }
     }
 }
