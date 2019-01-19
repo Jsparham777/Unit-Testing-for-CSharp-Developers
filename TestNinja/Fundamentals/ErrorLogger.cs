@@ -18,7 +18,15 @@ namespace TestNinja.Fundamentals
             // Write the log to a storage
             // ...
 
-            ErrorLogged?.Invoke(this, Guid.NewGuid());
+            OnErrorLogged(Guid.NewGuid());
+        }
+
+        protected virtual void OnErrorLogged(Guid errorId)
+        {
+            //Dont test private method
+            //Changed the implementation by creating this method and moving the event
+            //This doesn't break the public API and therefore the tests still pass
+            ErrorLogged?.Invoke(this, errorId);
         }
     }
 }
