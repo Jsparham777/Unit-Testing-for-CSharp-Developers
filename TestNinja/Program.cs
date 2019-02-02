@@ -7,7 +7,7 @@ namespace TestNinja
         static void Main(string[] args)
         {
             var service = new VideoService();
-            var title = service.ReadVideoTitle(new FileReader());
+            var title = service.ReadVideoTitle();
 
             //Instead of newing up the objects here, use a dependency injection framework (NInject)
         }
