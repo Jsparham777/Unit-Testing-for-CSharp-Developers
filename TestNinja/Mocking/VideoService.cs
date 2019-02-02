@@ -10,12 +10,13 @@ namespace TestNinja.Mocking
         private readonly IFileReader _fileReader;
 
         /// <summary>
+        /// Poor man's dependency injection
         /// Unit test Mock constructor. Pass the mock file reader is the 
         /// constructor is called by the unit test
         /// </summary>
         /// <param name="fileReader"></param>
         public VideoService(IFileReader fileReader = null)
-        {
+        {             
             //If the the file reader is null, new up a file reader
             _fileReader = fileReader ?? new FileReader();
         }
