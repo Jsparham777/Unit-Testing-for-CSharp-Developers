@@ -7,16 +7,22 @@ namespace TestNinja.Mocking
 {
     public class VideoService
     {
-        public IFileReader FileReader { get; set; }
+        private readonly IFileReader _fileReader;
 
-        public VideoService()
+        /// <summary>
+        /// Unit test Mock constructor. Pass the mock file reader is the 
+        /// constructor is called by the unit test
+        /// </summary>
+        /// <param name="fileReader"></param>
+        public VideoService(IFileReader fileReader = null)
         {
-            FileReader = new FileReader();
+            //If the the file reader is null, new up a file reader
+            _fileReader = fileReader ?? new FileReader();
         }
 
         public string ReadVideoTitle()
         {
-            var str = FileReader.Read("video.txt");
+            var str = _fileReader.Read("video.txt");
             var video = JsonConvert.DeserializeObject<Video>(str);
 
             if (video == null)
